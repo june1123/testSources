@@ -1,0 +1,38 @@
+version: 0.2
+
+# env:
+#   variables:
+#     key: "value"
+#     key: "value"
+#   parameter-store:
+#     key: "value"
+#     key: "value"
+
+phases:
+  install:
+    commands:
+      - node ./tools/test.js
+    # finally:
+    #   - command
+    #   - command
+  # pre_build:
+  #   commands:
+  #     - command
+  #     - command
+  # finally:
+  #   - command
+  #   - command
+  build:
+    commands:
+      - node ./tools/deploy.js
+    # finally:
+    #   - command
+    #   - command
+  # post_build:
+  #   commands:
+  #     - command
+  #     - command
+# cache:
+#   paths:
+#     - path
+#     - path

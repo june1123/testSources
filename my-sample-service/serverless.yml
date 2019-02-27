@@ -1,0 +1,54 @@
+service: my-sample-service
+
+provider:
+  name: aws
+  stage: production
+  runtime: nodejs8.10
+  region: ap-northeast-2
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:*"
+      Resource:
+        - "arn:aws:dynamodb:ap-northeast-2:*"
+  environment:
+    STAGE: ${self:custom.stage}
+    NODE_ENV: ${self:custom.stage}
+
+package:
+  individually: true
+  include:
+    - app/**/*.graphql
+    - config/**
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-plugin-optimize
+  - serverless-dynamodb-local
+  - serverless-dynamodb-autoscaling
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+
+functions:
+  my-sample-service-grpahql:
+    name: MySampleServiceGraphQl
+    handler: app/Handlers.GraphQlHandler
+    memorySize: 512
+    timeout: 15
+
+resources:
+  Resources:
+    MySampleDB:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: MySampleDB
+        AttributeDefinitions:
+          - AttributeName: shop_id
+            AttributeType: "N"
+        KeySchema:
+          - AttributeName: shop_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

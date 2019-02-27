@@ -1,0 +1,83 @@
+{
+  "name": "my-sample.services",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "package": "sls package",
+    "install": "sls dynamodb install",
+    "deploy": "sls deploy",
+    "pretest": "tsc --noEmit; tslint -p .",
+    "test": "NODE_ENV=test TZ=Etc/UTC mocha --require ts-node/register --exit ./test/*.js ./test/*.ts",
+    "test:cov": "nyc npm run test --",
+    "test:report": "npm run test:cov -- --reporter mocha-multi-reporters"
+  },
+  "dependencies": {
+    "apollo-upload-server": "^5.0.0",
+    "bluebird": "^3.5.0",
+    "config": "^2.0.1",
+    "core-js": "^2.5.7",
+    "dynogels": "^8.0.0",
+    "dynogels-promisified": "^1.0.4",
+    "express-graphql": "^0.6.12",
+    "graphql": "^0.13.2",
+    "graphql-import": "^0.7.1",
+    "graphql-list-fields": "^2.0.2",
+    "graphql-tools": "^3.0.2",
+    "ioredis": "^3.1.2",
+    "joi": "^10.5.2",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "numeral": "^2.0.6",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "serialize-error": "^2.1.0",
+    "uuid-v4": "^0.1.0",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.20",
+    "@types/chai": "^4.0.0",
+    "@types/express-graphql": "^0.6.1",
+    "@types/graphql": "^0.13.1",
+    "@types/lodash": "^4.14.109",
+    "@types/mocha": "^2.2.41",
+    "@types/node": "^10.3.1",
+    "@types/request-promise": "^4.1.39",
+    "@types/sinon": "^4.3.0",
+    "argparse": "^1.0.9",
+    "chai": "^4.1.2",
+    "coffeescript": "^2.3.1",
+    "js-yaml": "^3.9.1",
+    "json-loader": "^0.5.4",
+    "mocha": "^5.2.0",
+    "mocha-multi-reporters": "^1.1.7",
+    "nyc": "^12.0.2",
+    "rinore": "0.4.2",
+    "serverless": "^1.32.0",
+    "serverless-dynamodb-autoscaling": "^0.6.2",
+    "serverless-dynamodb-local": "^0.2.35",
+    "serverless-plugin-optimize": "^3.1.1-rc.1",
+    "serverless-plugin-typescript": "^1.1.5",
+    "sinon": "^5.1.0",
+    "ts-node": "^6.1.0",
+    "tslint": "^5.13.0",
+    "typescript": "^2.9.2"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "exclude": [
+      "config",
+      "test",
+      "**/gen-nodejs/**"
+    ],
+    "reporter": [
+      "cobertura",
+      "lcov",
+      "text-summary"
+    ],
+    "report-dir": "./_coverage",
+    "temp-directory": "./_coverage"
+  }
+}

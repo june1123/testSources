@@ -1,0 +1,11 @@
+node_modules
+_coverage
+
+# Serverless directories
+.serverless
+.webpack
+.db
+.dynamodb
+
+# LogViewer output directory
+.log

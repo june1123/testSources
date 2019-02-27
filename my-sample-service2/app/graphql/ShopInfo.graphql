@@ -1,0 +1,8 @@
+type ShopInfo {
+  shop_id: ID!
+  mall_id: String
+}
+
+type Query {
+  shop_info(shop_id: ID): ShopInfo
+}
